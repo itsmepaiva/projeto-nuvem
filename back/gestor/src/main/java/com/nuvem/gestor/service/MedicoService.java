@@ -10,6 +10,8 @@ import com.nuvem.gestor.domain.Medico;
 import com.nuvem.gestor.domain.DTO.MedicoDTO;
 import com.nuvem.gestor.repository.MedicoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class MedicoService {
 
@@ -30,18 +32,18 @@ public class MedicoService {
     }
 
     public Medico atualizar(Long id, MedicoDTO medicoDTO){
-        Optional<Medico> medico = medicoRepository.findById(id);
-        Medico medico1 = medico.get();
-        if(medicoDTO.getCRM() != null){
-            medico1.setCrm(medicoDTO.getCRM());
+        Medico medico = medicoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Medico com id: " + id + " nao foi encontrado"));
+        if(medicoDTO.getCRM() != null && !medicoDTO.getCRM().trim().isEmpty()){
+            medico.setCrm(medicoDTO.getCRM());
         }
-        if (medicoDTO.getEspecialidade() != null) {
-            medico1.setEspecialidade(medicoDTO.getCRM());
+        if (medicoDTO.getEspecialidade() != null && !medicoDTO.getEspecialidade().trim().isEmpty()) {
+            medico.setEspecialidade(medicoDTO.getEspecialidade());
         }
-        if (medicoDTO.getNome() != null) {
-            medico1.setNome(medicoDTO.getNome());
+        if (medicoDTO.getNome() != null && !medicoDTO.getNome().trim().isEmpty()) {
+            medico.setNome(medicoDTO.getNome());
         }
-        return medicoRepository.save(medico1);
+        return medicoRepository.save(medico);
     }
 
     public void deletar(Long id){
