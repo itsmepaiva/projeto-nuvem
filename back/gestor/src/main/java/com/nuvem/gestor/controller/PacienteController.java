@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nuvem.gestor.domain.Paciente;
-import com.nuvem.gestor.GestorApplication;
 import com.nuvem.gestor.domain.DTO.PacienteDTO;
 import com.nuvem.gestor.service.PacienteService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/pacientes")
 public class PacienteController {
 
     @Autowired
@@ -36,13 +36,13 @@ public class PacienteController {
     }
 
     @PatchMapping
-    public ResponseEntity<String> atualizar(Long id, PacienteDTO pacienteDTO){
+    public ResponseEntity<String> atualizar(@RequestBody Long id, PacienteDTO pacienteDTO){
         pacienteService.atualizar(id, pacienteDTO);
         return ResponseEntity.ok("Dados do(a) Paciente atualizados!");
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deletar(@RequestBody Long id){
+    public ResponseEntity<String> deletar(@RequestParam Long id){
         pacienteService.deletar(id);
         return ResponseEntity.ok("Dados do(a) Paciente deletados!");
     }
