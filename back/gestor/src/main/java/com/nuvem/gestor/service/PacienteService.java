@@ -10,6 +10,8 @@ import com.nuvem.gestor.domain.Paciente;
 import com.nuvem.gestor.domain.DTO.PacienteDTO;
 import com.nuvem.gestor.repository.PacienteRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class PacienteService {
 
@@ -30,21 +32,21 @@ public class PacienteService {
     }
 
     public Paciente atualizar(Long id, PacienteDTO pacienteDTO){
-        Optional<Paciente> paciente = pacienteRepository.findById(id);
-        Paciente paciente1 = paciente.get();
-        if(pacienteDTO.getCpf() != null){
-            paciente1.setCpf(pacienteDTO.getCpf());
+        Paciente paciente = pacienteRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Paciente com id: " + id + " nao foi encontrado"));
+        if(pacienteDTO.getCpf() != null && !pacienteDTO.getCpf().trim().isEmpty()){
+            paciente.setCpf(pacienteDTO.getCpf());
         }
-        if (pacienteDTO.getNome() != null) {
-            paciente1.setNome(pacienteDTO.getNome());
+        if (pacienteDTO.getNome() != null && !pacienteDTO.getNome().trim().isEmpty()) {
+            paciente.setNome(pacienteDTO.getNome());
         }
-        if (pacienteDTO.getEndereco() != null) {
-            paciente1.setEndereco(pacienteDTO.getEndereco());
+        if (pacienteDTO.getEndereco() != null && !pacienteDTO.getEndereco().trim().isEmpty()) {
+            paciente.setEndereco(pacienteDTO.getEndereco());
         }
-        if(pacienteDTO.getIdade() != null){
-            paciente1.setIdade(pacienteDTO.getIdade());
+        if(pacienteDTO.getIdade() != null && !pacienteDTO.getIdade().toString().trim().isEmpty()){
+            paciente.setIdade(pacienteDTO.getIdade());
         }
-        return pacienteRepository.save(paciente1);
+        return pacienteRepository.save(paciente);
     }
 
     public void deletar(Long id){
