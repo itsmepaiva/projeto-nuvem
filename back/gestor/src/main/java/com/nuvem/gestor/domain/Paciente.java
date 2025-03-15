@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_medico")
-public class Medico {
+@Table(name = "tb_paciente")
+public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,9 +18,10 @@ public class Medico {
     private String nome;
 
     @Column(unique = true)
-    private String crm;
+    private String cpf;
 
-    private String especialidade;
+    private String endereco;
 
+    private Integer idade;
 
 }
