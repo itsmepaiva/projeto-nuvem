@@ -7,9 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.nuvem.gestor.domain.Consulta;
-import com.nuvem.gestor.domain.Medico;
 import com.nuvem.gestor.domain.DTO.ConsultaDTO;
-import com.nuvem.gestor.domain.DTO.MedicoDTO;
 import com.nuvem.gestor.service.ConsultaService;
 
 @RestController

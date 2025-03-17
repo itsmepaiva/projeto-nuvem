@@ -24,10 +24,8 @@ public class ConsultaService {
 
     public Consulta marcarConsulta(ConsultaDTO consultaDTO){
         Consulta consulta = new Consulta();
-        Paciente paciente = pacienteRepository.findByNome(consultaDTO.getNomePaciente())
-            .orElseThrow(() -> new EntityNotFoundException("Paciente nao foi encontrado"));;
-        Medico medico = medicoRepository.findByNome(consultaDTO.getNomeMedico())
-            .orElseThrow(() -> new EntityNotFoundException("Medico nao foi encontrado"));
+        Paciente paciente = pacienteRepository.findByNome(consultaDTO.getNomePaciente());
+        Medico medico = medicoRepository.findByNome(consultaDTO.getNomeMedico());
 
         consulta.setDataConsulta(consultaDTO.getDataConsulta());
         consulta.setEPresencial(consultaDTO.isEPresencial());
@@ -52,13 +50,11 @@ public class ConsultaService {
         consulta.setEPresencial(consultaDTO.isEPresencial());
 
         if (consultaDTO.getNomeMedico() != null && !consultaDTO.getNomeMedico().trim().isEmpty()) {
-            Medico medico = medicoRepository.findByNome(consultaDTO.getNomeMedico())
-            .orElseThrow(() -> new EntityNotFoundException("Medico nao foi encontrado"));
+            Medico medico = medicoRepository.findByNome(consultaDTO.getNomeMedico());
             consulta.setMedico(medico);
         }
         if (consultaDTO.getNomePaciente() != null && !consultaDTO.getNomePaciente().trim().isEmpty() ) {
-            Paciente paciente = pacienteRepository.findByNome(consultaDTO.getNomePaciente())
-            .orElseThrow(() -> new EntityNotFoundException("Paciente nao foi encontrado"));;
+            Paciente paciente = pacienteRepository.findByNome(consultaDTO.getNomePaciente());
             consulta.setPaciente(paciente);
         }
 

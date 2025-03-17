@@ -10,5 +10,5 @@ import com.nuvem.gestor.domain.Paciente;
 
 @Repository
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
-    Optional<Paciente> findByNome(String nome);
+    Paciente findByNome(String nome);
 }

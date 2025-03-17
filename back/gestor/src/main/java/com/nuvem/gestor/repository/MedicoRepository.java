@@ -10,5 +10,5 @@ import com.nuvem.gestor.domain.Medico;
 
 @Repository
 public interface MedicoRepository extends JpaRepository<Medico, Long>{
-    Optional<Medico> findByNome(String nome);
+    Medico findByNome(String nome);
 }
