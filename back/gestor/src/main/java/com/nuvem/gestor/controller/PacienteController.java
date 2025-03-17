@@ -29,7 +29,7 @@ public class PacienteController {
     }
 
     @PatchMapping
-    public ResponseEntity<String> atualizar(@RequestBody Long id, PacienteDTO pacienteDTO){
+    public ResponseEntity<String> atualizar(@RequestParam Long id, @RequestBody PacienteDTO pacienteDTO){
         pacienteService.atualizar(id, pacienteDTO);
         return ResponseEntity.ok("Dados do(a) Paciente atualizados!");
     }

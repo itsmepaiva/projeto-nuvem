@@ -29,8 +29,8 @@ public class MedicoController {
         return medicoService.criar(medicoDTO);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<String> atualizar(Long id, MedicoDTO medicoDTO){
+    @PatchMapping
+    public ResponseEntity<String> atualizar(@RequestParam Long id, @RequestBody MedicoDTO medicoDTO){
         medicoService.atualizar(id, medicoDTO);
         return ResponseEntity.ok("Dados do Medico(a) atualizados!");
     }

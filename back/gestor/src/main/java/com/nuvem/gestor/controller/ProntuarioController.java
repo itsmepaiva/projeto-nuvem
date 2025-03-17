@@ -28,7 +28,7 @@ public class ProntuarioController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> atualizar(@RequestBody Long id, ProntuarioDTO prontuarioDTO){
+    public ResponseEntity<String> atualizar(@RequestParam Long id, @RequestBody ProntuarioDTO prontuarioDTO){
         prontuarioService.atualizarProntuario(id, prontuarioDTO);
         return ResponseEntity.ok("Dados do prontuario atualizados!");
     }
