@@ -26,7 +26,7 @@ public class ConsultaController {
         return consultaService.marcarConsulta(consultaDTO);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping
     public ResponseEntity<String> atualizar(@RequestParam Long id, @RequestBody ConsultaDTO consultaDTO){
         consultaService.atualizarConsulta(id, consultaDTO);
         return ResponseEntity.ok("Dados da consulta atualizados!");
