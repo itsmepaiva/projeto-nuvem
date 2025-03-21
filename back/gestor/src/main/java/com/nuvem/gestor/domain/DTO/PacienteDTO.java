@@ -13,7 +13,9 @@ public class PacienteDTO {
 
     private String cpf;
 
-    private String endereco;
+    private String altura;
+
+    private Double peso;
 
     private Integer idade;
 }

@@ -1,6 +1,8 @@
 package com.nuvem.gestor.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,9 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime dataConsulta;
+    private LocalDate data;
+
+    private LocalTime horario;
 
     private boolean ePresencial;
 

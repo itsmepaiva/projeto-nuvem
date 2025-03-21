@@ -27,7 +27,8 @@ public class ConsultaService {
         Paciente paciente = pacienteRepository.findByNome(consultaDTO.getNomePaciente());
         Medico medico = medicoRepository.findByNome(consultaDTO.getNomeMedico());
 
-        consulta.setDataConsulta(consultaDTO.getDataConsulta());
+        consulta.setData(consultaDTO.getData());
+        consulta.setHorario(consultaDTO.getHorario());
         consulta.setEPresencial(consultaDTO.isEPresencial());
         consulta.setMedico(medico);
         consulta.setPaciente(paciente);
@@ -43,8 +44,12 @@ public class ConsultaService {
             .orElseThrow(() -> new EntityNotFoundException("Consulta com id: " + id + " nao foi encontrada"));
             
         
-        if(consultaDTO.getDataConsulta() != null && !consultaDTO.getDataConsulta().toString().trim().isEmpty()){
-            consulta.setDataConsulta(consultaDTO.getDataConsulta());
+        if(consultaDTO.getHorario() != null && !consultaDTO.getHorario().toString().trim().isEmpty()){
+            consulta.setHorario(consultaDTO.getHorario());
+        }
+
+        if(consultaDTO.getData() != null && !consultaDTO.getData().toString().trim().isEmpty()){
+            consulta.setData(consultaDTO.getData());
         }
 
         consulta.setEPresencial(consultaDTO.isEPresencial());

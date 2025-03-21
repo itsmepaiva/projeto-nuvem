@@ -20,7 +20,9 @@ public class Paciente {
     @Column(unique = true)
     private String cpf;
 
-    private String endereco;
+    private String altura;
+
+    private Double peso;
 
     private Integer idade;
 

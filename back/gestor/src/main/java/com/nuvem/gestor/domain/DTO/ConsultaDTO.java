@@ -1,6 +1,8 @@
 package com.nuvem.gestor.domain.DTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConsultaDTO {
-    private LocalDateTime dataConsulta;
+    private LocalDate data;
+
+    private LocalTime horario;
 
     private boolean ePresencial;
 

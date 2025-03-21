@@ -21,7 +21,8 @@ public class PacienteService {
         Paciente paciente = new Paciente();
         paciente.setNome(pacienteDTO.getNome());
         paciente.setCpf(pacienteDTO.getCpf());
-        paciente.setEndereco(pacienteDTO.getEndereco());
+        paciente.setAltura(pacienteDTO.getAltura());
+        paciente.setPeso(pacienteDTO.getPeso());
         paciente.setIdade(pacienteDTO.getIdade());
         return pacienteRepository.save(paciente);
     }
@@ -39,8 +40,11 @@ public class PacienteService {
         if (pacienteDTO.getNome() != null && !pacienteDTO.getNome().trim().isEmpty()) {
             paciente.setNome(pacienteDTO.getNome());
         }
-        if (pacienteDTO.getEndereco() != null && !pacienteDTO.getEndereco().trim().isEmpty()) {
-            paciente.setEndereco(pacienteDTO.getEndereco());
+        if (pacienteDTO.getPeso() != null && !pacienteDTO.getPeso().toString().trim().isEmpty()) {
+            paciente.setPeso(pacienteDTO.getPeso());
+        }
+        if (pacienteDTO.getAltura() != null && !pacienteDTO.getAltura().toString().trim().isEmpty()) {
+            paciente.setAltura(pacienteDTO.getAltura());
         }
         if(pacienteDTO.getIdade() != null && !pacienteDTO.getIdade().toString().trim().isEmpty()){
             paciente.setIdade(pacienteDTO.getIdade());
