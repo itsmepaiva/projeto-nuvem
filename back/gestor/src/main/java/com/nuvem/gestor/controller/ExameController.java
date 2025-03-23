@@ -10,6 +10,7 @@ import com.nuvem.gestor.domain.DTO.ExameDTO;
 import com.nuvem.gestor.service.ExameService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/exames")
 public class ExameController {
     @Autowired

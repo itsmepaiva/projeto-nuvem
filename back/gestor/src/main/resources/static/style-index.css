@@ -1,0 +1,89 @@
+/* Resetando margin e padding do body */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos gerais das imagens */
+img {
+    width: 5%;
+}
+
+/* Estilos do header */
+header {
+    background: #3b82f6;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilos da lista de navegação */
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+/* Estilos para os links de navegação */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #a00000;
+}
+
+/* Efeito de hover nos links de navegação */
+nav ul li a:hover {
+    background: #c0392b;
+}
+
+/* Estilos do container da imagem */
+.imagem-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Estilos da imagem dentro do container */
+.imagem-container img {
+    width: 30%;
+    max-width: 1000px;
+    border-radius: 10px;
+}
+
+/* Estilos do footer */
+footer {
+    background: #3498db;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilos do container dentro do footer */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Estilos para a logo da unifor */
+.unifor img {
+    width: 5%;
+}
+
+/* Estilos das colunas dentro do footer */
+.coluna {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Estilos para o título h3 dentro do footer */
+h3 {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}

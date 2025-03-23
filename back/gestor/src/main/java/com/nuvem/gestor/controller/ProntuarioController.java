@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.nuvem.gestor.domain.Consulta;
 import com.nuvem.gestor.domain.Prontuario;
-import com.nuvem.gestor.domain.DTO.ConsultaDTO;
 import com.nuvem.gestor.domain.DTO.ProntuarioDTO;
 import com.nuvem.gestor.service.ProntuarioService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/prontuarios")
 public class ProntuarioController {
     @Autowired

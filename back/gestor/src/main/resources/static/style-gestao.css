@@ -1,0 +1,124 @@
+/* Faz o body ocupar a altura total da tela */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Faz o main ocupar o espaço restante, empurrando o footer para baixo */
+main {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Ajustes no header */
+header {
+    background-color: #3b82f6;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+}
+
+header img {
+    max-height: 40px;
+}
+/* Estilos da lista de navegação */
+nav ul li {
+    display: flex;
+    margin-right: 20px;
+}
+
+/* Estilos para os links de navegação */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #a00000;
+}
+
+/* Efeito de hover nos links de navegação */
+nav ul li a:hover {
+    background: #c0392b;
+}
+
+/* Estilos para os cards */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Estilos individuais do card */
+.card {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    display: block;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Estilos da parte superior do card */
+.top {
+    background-color: #d10000;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos da parte inferior do card */
+.bottom {
+    background-color: #3b82f6;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    flex-direction: column;
+}
+
+/* Estilos para os ícones no card */
+.icones {
+    width: 80px;
+    height: 80px;
+}
+
+/* Efeito ao passar o mouse sobre o card */
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+    background-color: #a50000;
+}
+
+/* Estilos para os textos dentro do card */
+.card h3, .card p {
+    margin: 0;
+    color: white;
+}
+
+/* Fixando o footer na parte inferior da página */
+footer {
+    text-align: center;
+    padding: 5px;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+footer img {
+    max-height: 30px;
+}

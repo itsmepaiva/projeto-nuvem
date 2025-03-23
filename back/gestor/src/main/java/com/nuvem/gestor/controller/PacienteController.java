@@ -12,6 +12,7 @@ import com.nuvem.gestor.service.PacienteService;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/pacientes")
 public class PacienteController {
 

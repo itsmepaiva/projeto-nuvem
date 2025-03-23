@@ -11,6 +11,7 @@ import com.nuvem.gestor.domain.DTO.ConsultaDTO;
 import com.nuvem.gestor.service.ConsultaService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/consultas")
 public class ConsultaController {
     @Autowired
