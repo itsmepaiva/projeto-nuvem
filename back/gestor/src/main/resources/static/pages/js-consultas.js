@@ -1,23 +1,22 @@
 function showForm(formType) {
-
-    const API_URL = "https://zany-trout-jjrx5qvgwxqr2j6jg-8080.app.github.dev/pacientes";
+    const API_URL = "https://zany-trout-jjrx5qvgwxqr2j6jg-8080.app.github.dev/consultas";
 
     const conteudo = document.getElementById('conteudo');
     let formHTML = '';
 
-    if (formType === 'criar') {
+    if (formType === 'marcar') {
         formHTML = `
-            <form id="form-criar">
+            <form id="form-marcar">
                 <label>Nome Completo do Paciente:</label>
                 <input type="text" id="nomePaciente" placeholder="Digite o nome" required>
-                <label>CPF:</label>
-                <input type="text" id="CPF" placeholder="Digite o CPF" required>
-                <label>Altura:</label>
-                <input type="number" id="altura" required>
-                <label>Peso:</label>
-                <input type="number" id="peso" required>
-                <label>Idade:</label>
-                <input type="number" id="idade" required>
+                <label>Data:</label>
+                <input type="date" id="data" required>
+                <label>Horário:</label>
+                <input type="time" id="horario" required>
+                <label>Nome Completo do Medico:</label>
+                <input type="text" id="nomeMedico" placeholder="Digite o nome do Medico" required>
+                <label>Tipo do Atendimento:</label>
+                <input type="text" id="tipoAtendimento" placeholder="Presencial ou Online" required>
                 <button type="submit">Marcar</button>
             </form>
         `;
@@ -26,26 +25,26 @@ function showForm(formType) {
     } else if (formType === 'atualizar') {
         formHTML = `
             <form id="form-atualizar">
-                <label>Id do Paciente :</label>
-                <input type="number" id="pacienteId" placeholder="Digite o número ID do paciente" required>
+                <label>Id da Consulta :</label>
+                <input type="number" id="consultaId" placeholder="Digite o número ID do exame" required>
                 <label>Nome Completo do Paciente:</label>
                 <input type="text" id="nomePaciente" placeholder="Digite o nome">
-                <label>CPF:</label>
-                <input type="text" id="CPF" placeholder="Digite o CPF">
-                <label>Altura:</label>
-                <input type="number" id="altura">
-                <label>Peso:</label>
-                <input type="number" id="peso">
-                <label>Idade:</label>
-                <input type="number" id="idade">
-                <button type="submit">Marcar</button>
+                <label>Data:</label>
+                <input type="date" id="data">
+                <label>Horário:</label>
+                <input type="time" id="horario">
+                <label>Nome Completo do Medico:</label>
+                <input type="text" id="nomeMedico" placeholder="Digite o nome do Medico">
+                <label>Tipo do Atendimento:</label>
+                <input type="text" id="tipoAtendimento" placeholder="Presencial ou Online">
+                <button type="submit">Atualizar</button>
             </form>
         `;
     } else if (formType === 'deletar') {
         formHTML = `
             <form id="form-deletar">
-                <label>Número ID do Paciente para DELETAR:</label>
-                <input type="number" id="pacienteId" placeholder="Digite o número ID do paciente" required>
+                <label>Número ID da Consulta para DELETAR:</label>
+                <input type="number" id="consultaId" placeholder="Digite o número ID da consulta" required>
                 <button type="submit">Deletar</button>
             </form>
         `;
@@ -55,11 +54,11 @@ function showForm(formType) {
 
     conteudo.innerHTML = formHTML;
 
-    
+    let ePresencial = true;
 
     // Envio de formulário de marcar consulta
     if (formType === 'marcar') {
-        const form = document.getElementById('form-criar');
+        const form = document.getElementById('form-marcar');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const nomePaciente = document.getElementById('nomePaciente').value;
@@ -67,6 +66,11 @@ function showForm(formType) {
             const horario = document.getElementById('horario').value;
             const nomeMedico = document.getElementById('nomeMedico').value;
             const tipoAtendimento = document.getElementById('tipoAtendimento').value;
+            if(tipoAtendimento == "presencial"){
+                ePresencial = true;
+            } else{
+                ePresencial = false;
+            }
 
             axios.post(API_URL, {
                 nomePaciente: nomePaciente,

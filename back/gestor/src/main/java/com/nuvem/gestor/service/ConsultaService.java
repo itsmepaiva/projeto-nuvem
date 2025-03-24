@@ -1,5 +1,6 @@
 package com.nuvem.gestor.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,20 @@ public class ConsultaService {
         return consultaRepository.save(consulta);
     }
 
-    public List<Consulta> listarConsultas(){
-        return consultaRepository.findAll();
+    //RETORNA TODAS CONSULTAS POREM CRIA UM DTO APENAS COM OS DADOS ESPECIFICADOS
+    public List<ConsultaDTO> listarConsultas(){
+        List<Consulta> consultas = consultaRepository.findAll();
+        List<ConsultaDTO> consultaDTOs = new ArrayList<>();
+        for(Consulta consulta : consultas){
+            ConsultaDTO consultaDTO = new ConsultaDTO();
+            consultaDTO.setNomePaciente(consulta.getPaciente().getNome());
+            consultaDTO.setNomeMedico(consulta.getMedico().getNome());
+            consultaDTO.setData(consulta.getData());
+            consultaDTO.setHorario(consulta.getHorario());
+            consultaDTO.setEPresencial(consulta.isEPresencial());
+            consultaDTOs.add(consultaDTO);
+        }
+        return consultaDTOs;
     }
 
     public Consulta atualizarConsulta(Long id, ConsultaDTO consultaDTO){
