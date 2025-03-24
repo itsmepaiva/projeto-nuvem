@@ -107,6 +107,7 @@ function showForm(formType) {
                     // Estrutura do HTML de cada objeto
                     div.innerHTML = `
                         <h3>Consulta de ${consulta.nomePaciente}</h3>
+                        <p><strong>Id da Consulta:</strong> ${consulta.id}</p>
                         <p><strong>Data:</strong> ${consulta.data}</p>
                         <p><strong>Horário:</strong> ${consulta.horario}</p>
                         <p><strong>Nome do Medico:</strong> ${consulta.nomeMedico}</p>
@@ -156,10 +157,10 @@ function showForm(formType) {
                 ePresencial: ePresencial
             })
             .then(response => {
-                conteudo.innerHTML = "<p>Paciente atualizado com sucesso!</p>";
+                conteudo.innerHTML = "<p>Consulta atualizada com sucesso!</p>";
             })
             .catch(error => {
-                conteudo.innerHTML = "<p>Erro ao atualizar paciente. Tente novamente.</p>";
+                conteudo.innerHTML = "<p>Erro ao atualizar consulta. Tente novamente.</p>";
             });
         });
     }
@@ -173,10 +174,10 @@ function showForm(formType) {
 
             axios.delete(`${API_URL}/${consultaDel}`)
                 .then(response => {
-                    conteudo.innerHTML = "<p>Paciente deletado com sucesso!</p>";
+                    conteudo.innerHTML = "<p>Consulta deletada com sucesso!</p>";
                 })
                 .catch(error => {
-                    conteudo.innerHTML = "<p>Erro ao deletar paciente. Tente novamente.</p>";
+                    conteudo.innerHTML = "<p>Erro ao deletar consulta. Tente novamente.</p>";
                 });
         });
     }

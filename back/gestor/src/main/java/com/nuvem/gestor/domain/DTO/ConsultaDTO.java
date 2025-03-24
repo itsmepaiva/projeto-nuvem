@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConsultaDTO {
+    private Long id = null;
+    
     private LocalDate data;
 
     private LocalTime horario;

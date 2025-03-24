@@ -47,6 +47,7 @@ public class ConsultaService {
             consultaDTO.setData(consulta.getData());
             consultaDTO.setHorario(consulta.getHorario());
             consultaDTO.setEPresencial(consulta.isEPresencial());
+            consultaDTO.setId(consulta.getId());
             consultaDTOs.add(consultaDTO);
         }
         return consultaDTOs;

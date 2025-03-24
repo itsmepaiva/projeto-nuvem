@@ -25,8 +25,9 @@ public class PacienteController {
     }
 
     @PostMapping
-    public Paciente criarPaciente(@RequestBody PacienteDTO pacienteDTO){
-        return pacienteService.criar(pacienteDTO);
+    public ResponseEntity<String> criarPaciente(@RequestBody PacienteDTO pacienteDTO){
+        pacienteService.criar(pacienteDTO);
+        return ResponseEntity.ok("Paciente criado!");
     }
 
     @PatchMapping

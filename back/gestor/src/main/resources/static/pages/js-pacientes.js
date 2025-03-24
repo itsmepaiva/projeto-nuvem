@@ -58,28 +58,28 @@ function showForm(formType) {
     
 
     // Envio de formulário de marcar consulta
-    if (formType === 'marcar') {
+    if (formType === 'criar') {
         const form = document.getElementById('form-criar');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const nomePaciente = document.getElementById('nomePaciente').value;
-            const data = document.getElementById('data').value;
-            const horario = document.getElementById('horario').value;
-            const nomeMedico = document.getElementById('nomeMedico').value;
-            const tipoAtendimento = document.getElementById('tipoAtendimento').value;
+            const cpf = document.getElementById('CPF').value;
+            const altura = document.getElementById('altura').value;
+            const peso = document.getElementById('peso').value;
+            const idade = document.getElementById('idade').value;
 
             axios.post(API_URL, {
-                nomePaciente: nomePaciente,
-                data: data,
-                horario: horario,
-                nomeMedico: nomeMedico,
-                ePresencial: ePresencial
+                nome: nomePaciente,
+                cpf: cpf,
+                altura: altura,
+                peso: peso,
+                idade: idade
             })
             .then(response => {
-                conteudo.innerHTML = "<p>Consulta marcada com sucesso!</p>";
+                conteudo.innerHTML = "<p>Paciente criado com sucesso!</p>";
             })
             .catch(error => {
-                conteudo.innerHTML = "<p>Erro ao marcar consulta. Tente novamente.</p>";
+                conteudo.innerHTML = "<p>Erro ao criar paciente. Tente novamente.</p>";
             });
         });
     }
@@ -91,22 +91,23 @@ function showForm(formType) {
         .then(response => {
             console.log(response.data);
             // Cria o HTML para exibir as consultas
-            const consultas = response.data;  // Aqui estamos assumindo que a resposta é um array de objetos
+            const pacientes = response.data;  // Aqui estamos assumindo que a resposta é um array de objetos
             const conteudo = document.getElementById('conteudo');
             
             // Verifica se há dados
-            if (consultas.length > 0) {
-                consultas.forEach(consulta => {
+            if (pacientes.length > 0) {
+                pacientes.forEach(paciente => {
                     const div = document.createElement('div');
                     div.classList.add('objeto');
 
                     // Estrutura do HTML de cada objeto
                     div.innerHTML = `
-                        <h3>Consulta de ${consulta.nomePaciente}</h3>
-                        <p><strong>Data:</strong> ${consulta.data}</p>
-                        <p><strong>Horário:</strong> ${consulta.horario}</p>
-                        <p><strong>Nome do Medico:</strong> ${consulta.nomeMedico}</p>
-                        <p><strong>Tipo de Atendimento:</strong> ${consulta.ePresencial}</p>
+                        <h3>Dados de ${paciente.nome}</h3>
+                        <p><strong>Id do paciente:</strong> ${paciente.id}</p>
+                        <p><strong>CPF:</strong> ${paciente.cpf}</p>
+                        <p><strong>Altura:</strong> ${paciente.altura}</p>
+                        <p><strong>Peso:</strong> ${paciente.peso}</p>
+                        <p><strong>Idade:</strong> ${paciente.idade}</p>
                     `;
                     
                     // Adiciona o novo item na tela
@@ -114,42 +115,38 @@ function showForm(formType) {
                 });
             } else {
                 // Caso não haja consultas
-                conteudo.innerHTML = "<p>Nenhuma consulta marcada.</p>";
+                conteudo.innerHTML = "<p>Nenhum paciente registrado.</p>";
             }
         })
         .catch(error => {
             // Se houver um erro ao fazer a requisição
             console.error('Erro ao obter os dados:', error);
-            document.getElementById('conteudo').innerHTML = "<p>Erro ao carregar as consultas.</p>";
+            document.getElementById('conteudo').innerHTML = "<p>Erro ao carregar os pacientes.</p>";
         });
     }
 
     // Envio de formulário de atualizar paciente
     if (formType === 'atualizar') {
 
-        const consultaId = document.getElementById('consultaId').value;
+        const consultaId = document.getElementById('pacienteId').value;
 
         const form = document.getElementById('form-atualizar');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const nomePacienteNv = document.getElementById('nomePaciente').value;
-            const dataNv = document.getElementById('data').value;
-            const horarioNv = document.getElementById('horario').value;
-            const nomeMedicoNv = document.getElementById('nomeMedico').value;
-            const tipoAtendimentoNv = document.getElementById('tipoAtendimento').value;
-            if(tipoAtendimentoNv == "presencial"){
-                ePresencial = true;
-            } else{
-                ePresencial = false;
-            }
+            const cpfNv = document.getElementById('CPF').value;
+            const alturaNv = document.getElementById('altura').value;
+            const pesoNv = document.getElementById('peso').value;
+            const idadeNv = document.getElementById('idade').value;
 
-            const consultaId = document.getElementById('consultaId').value;
-            axios.patch(`${API_URL}/${consultaId}`, {
-                nomePaciente: nomePacienteNv,
-                data: dataNv,
-                horario: horarioNv,
-                nomeMedico: nomeMedicoNv,
-                ePresencial: ePresencial
+
+            const pacienteId = document.getElementById('pacienteId').value;
+            axios.patch(`${API_URL}/${pacienteId}`, {
+                nome: nomePacienteNv,
+                cpf: cpfNv,
+                altura: alturaNv,
+                peso: pesoNv,
+                idade: idadeNv
             })
             .then(response => {
                 conteudo.innerHTML = "<p>Paciente atualizado com sucesso!</p>";
@@ -165,9 +162,9 @@ function showForm(formType) {
         const form = document.getElementById('form-deletar');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            const consultaDel = document.getElementById('consultaId').value;
+            const pacienteDel = document.getElementById('pacienteId').value;
 
-            axios.delete(`${API_URL}/${consultaDel}`)
+            axios.delete(`${API_URL}/${pacienteDel}`)
                 .then(response => {
                     conteudo.innerHTML = "<p>Paciente deletado com sucesso!</p>";
                 })
