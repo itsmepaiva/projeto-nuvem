@@ -30,14 +30,14 @@ public class PacienteController {
         return ResponseEntity.ok("Paciente criado!");
     }
 
-    @PatchMapping
-    public ResponseEntity<String> atualizar(@RequestParam Long id, @RequestBody PacienteDTO pacienteDTO){
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody PacienteDTO pacienteDTO){
         pacienteService.atualizar(id, pacienteDTO);
         return ResponseEntity.ok("Dados do(a) Paciente atualizados!");
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deletar(@RequestParam Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletar(@PathVariable Long id){
         pacienteService.deletar(id);
         return ResponseEntity.ok("Dados do(a) Paciente deletados!");
     }

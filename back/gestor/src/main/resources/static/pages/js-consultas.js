@@ -132,8 +132,6 @@ function showForm(formType) {
     // Envio de formulário de atualizar paciente
     if (formType === 'atualizar') {
 
-        const consultaId = document.getElementById('consultaId').value;
-
         const form = document.getElementById('form-atualizar');
         form.addEventListener('submit', function (e) {
             e.preventDefault();

@@ -24,18 +24,20 @@ public class MedicoController {
     }
     
     @PostMapping
-    public Medico criar(@RequestBody MedicoDTO medicoDTO){
-        return medicoService.criar(medicoDTO);
+    public ResponseEntity<String> criar(@RequestBody MedicoDTO medicoDTO){
+        medicoService.criar(medicoDTO);
+        return ResponseEntity.ok("Medico(a) criado!");
     }
 
-    @PatchMapping
-    public ResponseEntity<String> atualizar(@RequestParam Long id, @RequestBody MedicoDTO medicoDTO){
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> atualizar(@PathVariable Long id, @RequestBody MedicoDTO medicoDTO){
         medicoService.atualizar(id, medicoDTO);
         return ResponseEntity.ok("Dados do Medico(a) atualizados!");
     }
 
-    @DeleteMapping
-    public void deletar(@RequestParam Long Id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletar(@PathVariable Long Id){
         medicoService.deletar(Id);
+        return ResponseEntity.ok("Dados do Medico(a) deletado!");
     }
 }

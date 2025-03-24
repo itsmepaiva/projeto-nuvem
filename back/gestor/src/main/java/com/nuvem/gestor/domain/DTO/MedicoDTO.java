@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class MedicoDTO {
-
     private String nome;
 
     private String CRM;
