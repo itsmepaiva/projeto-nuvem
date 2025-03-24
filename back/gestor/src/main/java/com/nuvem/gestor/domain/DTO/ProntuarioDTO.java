@@ -16,5 +16,5 @@ public class ProntuarioDTO {
 
     private boolean precisaExame;
 
-    private Long consultorioId;
+    private Long consultaId;
 }

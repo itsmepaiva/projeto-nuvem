@@ -22,8 +22,8 @@ public class ProntuarioService {
 
     public Prontuario gerarProntuario(ProntuarioDTO prontuarioDTO){
         Prontuario prontuario = new Prontuario();
-        Consulta consulta = consultaRepository.findById(prontuarioDTO.getConsultorioId())
-            .orElseThrow(() -> new EntityNotFoundException("Consulta com id: " + prontuarioDTO.getConsultorioId() + " nao foi encontrada"));
+        Consulta consulta = consultaRepository.findById(prontuarioDTO.getConsultaId())
+            .orElseThrow(() -> new EntityNotFoundException("Consulta com id: " + prontuarioDTO.getConsultaId() + " nao foi encontrada"));
         prontuario.setDiagnostico(prontuarioDTO.getDiagnostico());
         prontuario.setSintomas(prontuarioDTO.getSintomas());
         prontuario.setConsulta(consulta);
@@ -48,9 +48,9 @@ public class ProntuarioService {
         if (prontuarioDTO.getSintomas() != null && !prontuarioDTO.getSintomas().isEmpty()){
             prontuario.setSintomas(prontuarioDTO.getSintomas());
         }
-        if (prontuarioDTO.getConsultorioId() != null && !prontuarioDTO.getConsultorioId().toString().trim().isEmpty()){
-            Consulta consulta = consultaRepository.findById(prontuarioDTO.getConsultorioId())
-                .orElseThrow(() -> new EntityNotFoundException("Consulta com id: " + prontuarioDTO.getConsultorioId() + " nao foi encontrada"));
+        if (prontuarioDTO.getConsultaId() != null && !prontuarioDTO.getConsultaId().toString().trim().isEmpty()){
+            Consulta consulta = consultaRepository.findById(prontuarioDTO.getConsultaId())
+                .orElseThrow(() -> new EntityNotFoundException("Consulta com id: " + prontuarioDTO.getConsultaId() + " nao foi encontrada"));
             prontuario.setConsulta(consulta);
         }
         
