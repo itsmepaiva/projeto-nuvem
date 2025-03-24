@@ -1,5 +1,6 @@
 package com.nuvem.gestor.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,19 @@ public class ProntuarioService {
         return prontuarioRepository.save(prontuario);
     } 
 
-    public List<Prontuario> listarProntuarios(){
-        return prontuarioRepository.findAll();
+    public List<ProntuarioDTO> listarProntuarios(){
+        List<Prontuario> prontuarios = prontuarioRepository.findAll();
+        List<ProntuarioDTO> prontuarioDTOs = new ArrayList<>();
+        for(Prontuario prontuario : prontuarios){
+            ProntuarioDTO prontuarioDTO = new ProntuarioDTO();
+            prontuarioDTO.setConsultaId(prontuario.getConsulta().getId());
+            prontuarioDTO.setDiagnostico(prontuario.getDiagnostico());
+            prontuarioDTO.setId(prontuario.getId());
+            prontuarioDTO.setPrecisaExame(prontuario.isPrecisaExame());
+            prontuarioDTO.setSintomas(prontuario.getSintomas());
+            prontuarioDTOs.add(prontuarioDTO);
+        }
+        return prontuarioDTOs;
     }
 
     public Prontuario atualizarProntuario(Long id, ProntuarioDTO prontuarioDTO){

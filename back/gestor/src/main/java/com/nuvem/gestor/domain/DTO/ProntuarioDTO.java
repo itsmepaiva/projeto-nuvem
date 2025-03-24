@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProntuarioDTO {
+    private Long id = null;
+
     private List<String> sintomas;
 
     private String diagnostico;

@@ -29,17 +29,16 @@ function showForm(formType) {
                 <label>Id do Prontuario :</label>
                 <input type="number" id="prontuarioId" placeholder="Digite o número ID do Prontuario" required>
                 <label>Digite os sintomas:</label>
-                <input type="text" id="sintomas" placeholder="Digite os sintomas" required>
+                <input type="text" id="sintomas" placeholder="Digite os sintomas">
                 <label>Diagnostico:</label>
-                <input type="text" id="diagnostico" placeholder="Digite o diagnostico medico" required>
-                <label for="opcoes">Escolha uma opção:</label>
+                <input type="text" id="diagnostico" placeholder="Digite o diagnostico medico">
+                <label for="opcoes">Precisa de Exame? Escolha uma opção:</label>
                 <select id="opcoes">
                     <option value="true">SIM</option>
                     <option value="false">NAO</option>
                 </select>
-                <p id="resultado"></p>
                 <label>Id da Consulta:</label>
-                <input type="number" id="consultaId" required>
+                <input type="number" id="consultaId">
                 <button type="submit">Atualizar</button>
             </form>
         `;
@@ -90,7 +89,7 @@ function showForm(formType) {
         .then(response => {
             console.log(response.data);
             // Cria o HTML para exibir as consultas
-            const exames = response.data; 
+            const prontuarios = response.data; 
             const conteudo = document.getElementById('conteudo');
             
             // Verifica se há dados
@@ -99,13 +98,15 @@ function showForm(formType) {
                     const div = document.createElement('div');
                     div.classList.add('objeto');
 
+                    const listaString = JSON.stringify(prontuario.sintomas)
+                    const stringExame = prontuario.precisaExame.toString();
                     // Estrutura do HTML de cada objeto
                     div.innerHTML = `
-                        <h3>Consulta de ${prontuario.id}</h3>
-                        <p><strong>Id da Consulta:</strong> ${prontuario.id}</p>
-                        <p><strong>Data:</strong> ${prontuario.data}</p>
-                        <p><strong>Horário:</strong> ${prontuario.horario}</p>
-                        <p><strong>Nome do Medico:</strong> ${prontuario.tipoExame}</p>
+                        <h3>Consulta de id:  ${prontuario.id}</h3>
+                        <p><strong>Sintomas:</strong> ${listaString}</p>
+                        <p><strong>Diagnostico:</strong> ${prontuario.diagnostico}</p>
+                        <p><strong>Precisa de exame:</strong> ${stringExame}</p>
+                        <p><strong>Id da consulta:</strong> ${prontuario.consultaId}</p>
                     `;
                     
                     // Adiciona o novo item na tela
@@ -113,13 +114,13 @@ function showForm(formType) {
                 });
             } else {
                 // Caso não haja consultas
-                conteudo.innerHTML = "<p>Nenhum exame marcado.</p>";
+                conteudo.innerHTML = "<p>Nenhum prontuario gerado.</p>";
             }
         })
         .catch(error => {
             // Se houver um erro ao fazer a requisição
             console.error('Erro ao obter os dados:', error);
-            document.getElementById('conteudo').innerHTML = "<p>Erro ao carregar os exames.</p>";
+            document.getElementById('conteudo').innerHTML = "<p>Erro ao carregar os prontuarios.</p>";
         });
     }
 
@@ -129,23 +130,23 @@ function showForm(formType) {
         const form = document.getElementById('form-atualizar');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            const prontuarioId = document.getElementById('prontuarioId').value;
-            const data = document.getElementById('data').value;
-            const horario = document.getElementById('horario').value;
-            const exame = document.getElementById('exame').value;
+            const listaSintomasNv = pegarLista();
+            const diagnosticoNv = document.getElementById('diagnostico').value;
+            const precisaExameNv = capturarEscolha()
+            const consultaIdNv = document.getElementById('consultaId').value;
 
-            const exameId = document.getElementById('exameId').value;
-            axios.patch(`${API_URL}/${exameId}`, {
-                prontuarioId: prontuarioId,
-                data: data,
-                horario: horario,
-                tipoExame: exame 
+            const prontuarioId = document.getElementById('prontuarioId').value;
+            axios.patch(`${API_URL}/${prontuarioId}`, {
+                sintomas: listaSintomasNv,
+                diagnostico: diagnosticoNv,
+                precisaExame: precisaExameNv,
+                consultaId: consultaIdNv  
             })
             .then(response => {
-                conteudo.innerHTML = "<p>Exame atualizado com sucesso!</p>";
+                conteudo.innerHTML = "<p>Prontuario atualizado com sucesso!</p>";
             })
             .catch(error => {
-                conteudo.innerHTML = "<p>Erro ao atualizar exame. Tente novamente.</p>";
+                conteudo.innerHTML = "<p>Erro ao atualizar prontuario. Tente novamente.</p>";
             });
         });
     }
@@ -155,14 +156,14 @@ function showForm(formType) {
         const form = document.getElementById('form-deletar');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            const exameId = document.getElementById('exameId').value;
+            const prontuarioId = document.getElementById('prontuarioId').value;
 
-            axios.delete(`${API_URL}/${exameId}`)
+            axios.delete(`${API_URL}/${prontuarioId}`)
                 .then(response => {
-                    conteudo.innerHTML = "<p>Exame deletado com sucesso!</p>";
+                    conteudo.innerHTML = "<p>Prontuario deletado com sucesso!</p>";
                 })
                 .catch(error => {
-                    conteudo.innerHTML = "<p>Erro ao deletar exame. Tente novamente.</p>";
+                    conteudo.innerHTML = "<p>Erro ao deletar Prontuario. Tente novamente.</p>";
                 });
         });
     }
