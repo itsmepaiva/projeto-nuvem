@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class MedicoDTO {
     private String nome;
 
-    private String CRM;
+    private String crm;
 
     private String especialidade;
 }

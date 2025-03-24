@@ -6,7 +6,7 @@
     <title>Agendar Consutas</title>
     <link rel="stylesheet" href="style-geral.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script defer src="js-pacientes.js"></script>
+    <script defer src="js-exames.js"></script>
 </head>
 <body>
     <header>
@@ -16,16 +16,16 @@
             </ul>
         </nav>
         <img src="/img/Logo.png">
-        <h1>Pacientes</h1>
+        <h1>Exames</h1>
     </header>
     <div class="container">
         <aside class="menu">
-            <h2>Pacientes</h2>
+            <h2>Exames</h2>
             <p>Escolha uma opção abaixo:</p>
-            <button onclick="showForm('criar')">Criar Paciente</button>
-            <button onclick="showForm('retornar')">Retornar Pacientes</button>
-            <button onclick="showForm('atualizar')">Atualizar Paciente</button>
-            <button onclick="showForm('deletar')">Deletar Paciente</button>
+            <button onclick="showForm('marcar')">Marcar Exame</button>
+            <button onclick="showForm('retornar')">Retornar Exames</button>
+            <button onclick="showForm('atualizar')">Atualizar Exame</button>
+            <button onclick="showForm('deletar')">Deletar Exame</button>
         </aside>
         <section class="conteudo" id="conteudo">
             <p>Selecione uma opção.</p>

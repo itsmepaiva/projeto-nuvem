@@ -11,7 +11,7 @@ function showForm(formType) {
                 <label>Nome Completo do Medico:</label>
                 <input type="text" id="nomeMedico" placeholder="Digite o nome" required>
                 <label>CRM:</label>
-                <input type="text" id="CRM" placeholder="Digite o CRM" required>
+                <input type="text" id="crm" placeholder="Digite o CRM" required>
                 <label>Especialidade:</label>
                 <input type="text" id="especialidade" required>
                 <button type="submit">Marcar</button>
@@ -27,7 +27,7 @@ function showForm(formType) {
                 <label>Nome Completo do Medico:</label>
                 <input type="text" id="nomeMedico" placeholder="Digite o nome">
                 <label>CRM:</label>
-                <input type="text" id="CRM" placeholder="Digite o CRM">
+                <input type="text" id="crm" placeholder="Digite o CRM">
                 <label>Especialidade:</label>
                 <input type="text" id="especialidade">
                 <button type="submit">Marcar</button>
@@ -36,8 +36,8 @@ function showForm(formType) {
     } else if (formType === 'deletar') {
         formHTML = `
             <form id="form-deletar">
-                <label>Número ID do Paciente para DELETAR:</label>
-                <input type="number" id="pacienteId" placeholder="Digite o número ID do paciente" required>
+                <label>Número ID do Medico para DELETAR:</label>
+                <input type="number" id="medicoId" placeholder="Digite o número ID do medico" required>
                 <button type="submit">Deletar</button>
             </form>
         `;
@@ -55,13 +55,13 @@ function showForm(formType) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const nomeMedico = document.getElementById('nomeMedico').value;
-            const crm = document.getElementById('CRM').value;
+            const crm = document.getElementById('crm').value;
             const especialidade = document.getElementById('especialidade').value;
 
 
             axios.post(API_URL, {
                 nome: nomeMedico,
-                CRM: crm,
+                crm: crm,
                 especialidade: especialidade
             })
             .then(response => {
@@ -93,8 +93,8 @@ function showForm(formType) {
                     div.innerHTML = `
                         <h3>Dados de ${medico.nome}</h3>
                         <p><strong>Id do medico:</strong> ${medico.id}</p>
-                        <p><strong>CPF:</strong> ${medico.crm}</p>
-                        <p><strong>Altura:</strong> ${medico.especialidade}</p>
+                        <p><strong>CRM:</strong> ${medico.crm}</p>
+                        <p><strong>Especialidade:</strong> ${medico.especialidade}</p>
                     `;
                     
                     // Adiciona o novo item na tela
@@ -119,12 +119,12 @@ function showForm(formType) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const nomeMedicoNv = document.getElementById('nomeMedico').value;
-            const crmNv = document.getElementById('CRM').value;
+            const crmNv = document.getElementById('crm').value;
             const especialidadeNv = document.getElementById('especialidade').value;
             const medicoId = document.getElementById('medicoId').value;
             axios.patch(`${API_URL}/${medicoId}`, {
                 nome: nomeMedicoNv,
-                CRM: crmNv,
+                crm: crmNv,
                 especialidade: especialidadeNv
             })
             .then(response => {

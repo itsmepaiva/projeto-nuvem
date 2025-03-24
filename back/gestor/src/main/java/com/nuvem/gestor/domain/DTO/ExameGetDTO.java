@@ -8,15 +8,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ExameDTO {
-    private Long prontuarioId;
+@NoArgsConstructor
+public class ExameGetDTO {
+    private Long id;
+
+    private String nomePaciente;
 
     private String tipoExame;
 
     private LocalDate data;
 
     private LocalTime hora;
-
 }

@@ -19,7 +19,7 @@ public class MedicoService {
     public Medico criar(MedicoDTO medicoDTO) {
         Medico medico = new Medico();
         medico.setNome(medicoDTO.getNome());
-        medico.setCrm(medicoDTO.getCRM());
+        medico.setCrm(medicoDTO.getCrm());
 //DEFINIR UM ENUM PARA ESPECIALIDADES 
         medico.setEspecialidade(medicoDTO.getEspecialidade());
         return medicoRepository.save(medico);
@@ -32,8 +32,8 @@ public class MedicoService {
     public Medico atualizar(Long id, MedicoDTO medicoDTO){
         Medico medico = medicoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Medico com id: " + id + " nao foi encontrado"));
-        if(medicoDTO.getCRM() != null && !medicoDTO.getCRM().trim().isEmpty()){
-            medico.setCrm(medicoDTO.getCRM());
+        if(medicoDTO.getCrm() != null && !medicoDTO.getCrm().trim().isEmpty()){
+            medico.setCrm(medicoDTO.getCrm());
         }
         if (medicoDTO.getEspecialidade() != null && !medicoDTO.getEspecialidade().trim().isEmpty()) {
             medico.setEspecialidade(medicoDTO.getEspecialidade());

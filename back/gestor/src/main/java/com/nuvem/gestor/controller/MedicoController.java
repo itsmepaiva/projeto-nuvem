@@ -36,8 +36,8 @@ public class MedicoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletar(@PathVariable Long Id){
-        medicoService.deletar(Id);
+    public ResponseEntity<String> deletar(@PathVariable Long id){
+        medicoService.deletar(id);
         return ResponseEntity.ok("Dados do Medico(a) deletado!");
     }
 }

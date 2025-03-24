@@ -26,7 +26,7 @@ function showForm(formType) {
         formHTML = `
             <form id="form-atualizar">
                 <label>Id da Consulta :</label>
-                <input type="number" id="consultaId" placeholder="Digite o número ID do exame" required>
+                <input type="number" id="consultaId" placeholder="Digite o número ID da consulta" required>
                 <label>Nome Completo do Paciente:</label>
                 <input type="text" id="nomePaciente" placeholder="Digite o nome">
                 <label>Data:</label>

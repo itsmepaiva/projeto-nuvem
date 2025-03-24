@@ -1,5 +1,6 @@
 package com.nuvem.gestor.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.nuvem.gestor.domain.Exame;
 import com.nuvem.gestor.domain.Prontuario;
 import com.nuvem.gestor.domain.DTO.ExameDTO;
+import com.nuvem.gestor.domain.DTO.ExameGetDTO;
 import com.nuvem.gestor.repository.ExameRepository;
 import com.nuvem.gestor.repository.ProntuarioRepository;
 
@@ -32,8 +34,19 @@ public class ExameService {
         return exameRepository.save(exame);
     }
 
-    public List<Exame> listarExames(){
-        return exameRepository.findAll();
+    public List<ExameGetDTO> listarExames(){
+        List<Exame> exames = exameRepository.findAll();
+        List<ExameGetDTO> exameGetDTOs = new ArrayList<>();
+        for(Exame exame : exames){
+            ExameGetDTO exameGetDTO = new ExameGetDTO();
+            exameGetDTO.setData(exame.getData());
+            exameGetDTO.setHora(exame.getHora());
+            exameGetDTO.setId(exameGetDTO.getId());
+            exameGetDTO.setNomePaciente(exame.getNomePaciente());
+            exameGetDTO.setTipoExame(exame.getTipoExame());
+            exameGetDTOs.add(exameGetDTO);
+        }
+        return exameGetDTOs;
     }
 
     public Exame atualizarExame(Long id, ExameDTO exameDTO){
