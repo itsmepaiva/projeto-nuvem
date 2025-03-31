@@ -41,13 +41,19 @@ public class ExameService {
             ExameGetDTO exameGetDTO = new ExameGetDTO();
             exameGetDTO.setData(exame.getData());
             exameGetDTO.setHora(exame.getHora());
-            exameGetDTO.setId(exameGetDTO.getId());
+            exameGetDTO.setId(exame.getId());
             exameGetDTO.setNomePaciente(exame.getNomePaciente());
             exameGetDTO.setTipoExame(exame.getTipoExame());
             exameGetDTOs.add(exameGetDTO);
         }
         return exameGetDTOs;
     }
+
+    public List<Exame> listarTodosExames(){
+        return exameRepository.findAll();
+    }
+
+
 
     public Exame atualizarExame(Long id, ExameDTO exameDTO){
         Exame exame = exameRepository.findById(id)

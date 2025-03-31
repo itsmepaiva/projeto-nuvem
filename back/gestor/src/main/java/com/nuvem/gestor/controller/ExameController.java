@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.nuvem.gestor.domain.Exame;
 import com.nuvem.gestor.domain.DTO.ExameDTO;
 import com.nuvem.gestor.domain.DTO.ExameGetDTO;
 import com.nuvem.gestor.service.ExameService;
@@ -19,6 +21,11 @@ public class ExameController {
    @GetMapping
     public List<ExameGetDTO> retornar() {
         return exameService.listarExames();
+    }
+
+    @GetMapping("/todos")
+    public List<Exame> retornarTodos(){
+        return exameService.listarTodosExames();
     }
     
     @PostMapping

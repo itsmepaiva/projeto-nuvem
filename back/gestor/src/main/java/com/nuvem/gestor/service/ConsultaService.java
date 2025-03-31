@@ -30,7 +30,7 @@ public class ConsultaService {
 
         consulta.setData(consultaDTO.getData());
         consulta.setHorario(consultaDTO.getHorario());
-        consulta.setEPresencial(consultaDTO.isEPresencial());
+        consulta.setEPresencial(consultaDTO.isPresencial());
         consulta.setMedico(medico);
         consulta.setPaciente(paciente);
         return consultaRepository.save(consulta);
@@ -46,7 +46,7 @@ public class ConsultaService {
             consultaDTO.setNomeMedico(consulta.getMedico().getNome());
             consultaDTO.setData(consulta.getData());
             consultaDTO.setHorario(consulta.getHorario());
-            consultaDTO.setEPresencial(consulta.isEPresencial());
+            consultaDTO.setPresencial(consulta.isEPresencial());
             consultaDTO.setId(consulta.getId());
             consultaDTOs.add(consultaDTO);
         }
@@ -66,7 +66,7 @@ public class ConsultaService {
             consulta.setData(consultaDTO.getData());
         }
 
-        consulta.setEPresencial(consultaDTO.isEPresencial());
+        consulta.setEPresencial(consultaDTO.isPresencial());
 
         if (consultaDTO.getNomeMedico() != null && !consultaDTO.getNomeMedico().trim().isEmpty()) {
             Medico medico = medicoRepository.findByNome(consultaDTO.getNomeMedico());

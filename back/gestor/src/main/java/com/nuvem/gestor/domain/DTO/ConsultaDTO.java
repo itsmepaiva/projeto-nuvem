@@ -17,7 +17,7 @@ public class ConsultaDTO {
 
     private LocalTime horario;
 
-    private boolean ePresencial;
+    private boolean presencial;
 
     private String nomePaciente;
 

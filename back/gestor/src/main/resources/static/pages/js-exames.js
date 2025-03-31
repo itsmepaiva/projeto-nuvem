@@ -1,5 +1,5 @@
 function showForm(formType) {
-    const API_URL = "https://zany-trout-jjrx5qvgwxqr2j6jg-8080.app.github.dev/exames";
+    const API_URL = "http://vitamed.us-east-1.elasticbeanstalk.com/exames";
 
     const conteudo = document.getElementById('conteudo');
     let formHTML = '';
@@ -64,7 +64,7 @@ function showForm(formType) {
             axios.post(API_URL, {
                 prontuarioId: prontuarioId,
                 data: data,
-                horario: horario,
+                hora: horario,
                 tipoExame: exame 
             })
             .then(response => {
@@ -97,8 +97,8 @@ function showForm(formType) {
                         <h3>Consulta de ${exame.nomePaciente}</h3>
                         <p><strong>Id da Consulta:</strong> ${exame.id}</p>
                         <p><strong>Data:</strong> ${exame.data}</p>
-                        <p><strong>Horário:</strong> ${exame.horario}</p>
-                        <p><strong>Nome do Medico:</strong> ${exame.tipoExame}</p>
+                        <p><strong>Horário:</strong> ${exame.hora}</p>
+                        <p><strong>Exame:</strong> ${exame.tipoExame}</p>
                     `;
                     
                     // Adiciona o novo item na tela
@@ -131,7 +131,7 @@ function showForm(formType) {
             axios.patch(`${API_URL}/${exameId}`, {
                 prontuarioId: prontuarioId,
                 data: data,
-                horario: horario,
+                hora: horario,
                 tipoExame: exame 
             })
             .then(response => {

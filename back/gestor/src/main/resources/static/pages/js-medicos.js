@@ -1,6 +1,6 @@
 function showForm(formType) {
 
-    const API_URL = "https://zany-trout-jjrx5qvgwxqr2j6jg-8080.app.github.dev/medicos";
+    const API_URL = "http://vitamed.us-east-1.elasticbeanstalk.com/medicos";
 
     const conteudo = document.getElementById('conteudo');
     let formHTML = '';

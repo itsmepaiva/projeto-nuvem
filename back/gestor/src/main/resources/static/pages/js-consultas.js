@@ -1,5 +1,5 @@
 function showForm(formType) {
-    const API_URL = "https://zany-trout-jjrx5qvgwxqr2j6jg-8080.app.github.dev/consultas";
+    const API_URL = "http://vitamed.us-east-1.elasticbeanstalk.com/consultas";
 
     const conteudo = document.getElementById('conteudo');
     let formHTML = '';
@@ -15,8 +15,11 @@ function showForm(formType) {
                 <input type="time" id="horario" required>
                 <label>Nome Completo do Medico:</label>
                 <input type="text" id="nomeMedico" placeholder="Digite o nome do Medico" required>
-                <label>Tipo do Atendimento:</label>
-                <input type="text" id="tipoAtendimento" placeholder="Presencial ou Online" required>
+                <label for="opcoes">Tipo de Atendimento. Escolha uma opção:</label>
+                <select id="opcoes">
+                    <option value="true">Presencial</option>
+                    <option value="false">Online</option>
+                </select>
                 <button type="submit">Marcar</button>
             </form>
         `;
@@ -35,8 +38,11 @@ function showForm(formType) {
                 <input type="time" id="horario">
                 <label>Nome Completo do Medico:</label>
                 <input type="text" id="nomeMedico" placeholder="Digite o nome do Medico">
-                <label>Tipo do Atendimento:</label>
-                <input type="text" id="tipoAtendimento" placeholder="Presencial ou Online">
+                <label for="opcoes">Tipo de Atendimento. Escolha uma opção:</label>
+                <select id="opcoes">
+                    <option value="true">Presencial</option>
+                    <option value="false">Online</option>
+                </select>
                 <button type="submit">Atualizar</button>
             </form>
         `;
@@ -54,7 +60,6 @@ function showForm(formType) {
 
     conteudo.innerHTML = formHTML;
 
-    let ePresencial = true;
 
     // Envio de formulário de marcar consulta
     if (formType === 'marcar') {
@@ -65,19 +70,14 @@ function showForm(formType) {
             const data = document.getElementById('data').value;
             const horario = document.getElementById('horario').value;
             const nomeMedico = document.getElementById('nomeMedico').value;
-            const tipoAtendimento = document.getElementById('tipoAtendimento').value;
-            if(tipoAtendimento == "presencial"){
-                ePresencial = true;
-            } else{
-                ePresencial = false;
-            }
+            const ePresencial = capturarEscolha();
 
             axios.post(API_URL, {
                 nomePaciente: nomePaciente,
                 data: data,
                 horario: horario,
                 nomeMedico: nomeMedico,
-                ePresencial: ePresencial
+                presencial: ePresencial
             })
             .then(response => {
                 conteudo.innerHTML = "<p>Consulta marcada com sucesso!</p>";
@@ -104,6 +104,7 @@ function showForm(formType) {
                     const div = document.createElement('div');
                     div.classList.add('objeto');
 
+                    const stringConsulta = consulta.presencial !== undefined ? consulta.presencial.toString() : "Não informado";
                     // Estrutura do HTML de cada objeto
                     div.innerHTML = `
                         <h3>Consulta de ${consulta.nomePaciente}</h3>
@@ -111,7 +112,7 @@ function showForm(formType) {
                         <p><strong>Data:</strong> ${consulta.data}</p>
                         <p><strong>Horário:</strong> ${consulta.horario}</p>
                         <p><strong>Nome do Medico:</strong> ${consulta.nomeMedico}</p>
-                        <p><strong>Tipo de Atendimento:</strong> ${consulta.ePresencial}</p>
+                        <p><strong>Consulta Presencial?:</strong> ${stringConsulta}</p>
                     `;
                     
                     // Adiciona o novo item na tela
@@ -139,12 +140,7 @@ function showForm(formType) {
             const dataNv = document.getElementById('data').value;
             const horarioNv = document.getElementById('horario').value;
             const nomeMedicoNv = document.getElementById('nomeMedico').value;
-            const tipoAtendimentoNv = document.getElementById('tipoAtendimento').value;
-            if(tipoAtendimentoNv == "presencial"){
-                ePresencial = true;
-            } else{
-                ePresencial = false;
-            }
+            const tipoAtendimentoNv = capturarEscolha()
 
             const consultaId = document.getElementById('consultaId').value;
             axios.patch(`${API_URL}/${consultaId}`, {
@@ -152,7 +148,7 @@ function showForm(formType) {
                 data: dataNv,
                 horario: horarioNv,
                 nomeMedico: nomeMedicoNv,
-                ePresencial: ePresencial
+                presencial: tipoAtendimentoNv
             })
             .then(response => {
                 conteudo.innerHTML = "<p>Consulta atualizada com sucesso!</p>";
@@ -178,5 +174,11 @@ function showForm(formType) {
                     conteudo.innerHTML = "<p>Erro ao deletar consulta. Tente novamente.</p>";
                 });
         });
+    }
+
+    function capturarEscolha(){
+        const select = document.getElementById("opcoes"); // Obtém o <select>
+        const valorBooleano = select.value === "true"; // Converte a string para booleano
+        return valorBooleano;
     }
 }

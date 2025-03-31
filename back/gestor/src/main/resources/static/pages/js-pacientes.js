@@ -1,6 +1,6 @@
 function showForm(formType) {
 
-    const API_URL = "https://zany-trout-jjrx5qvgwxqr2j6jg-8080.app.github.dev/pacientes";
+    const API_URL = "http://vitamed.us-east-1.elasticbeanstalk.com/pacientes";
 
     const conteudo = document.getElementById('conteudo');
     let formHTML = '';
@@ -13,9 +13,9 @@ function showForm(formType) {
                 <label>CPF:</label>
                 <input type="text" id="CPF" placeholder="Digite o CPF" required>
                 <label>Altura:</label>
-                <input type="number" id="altura" required>
+                <input type="float" id="altura" required>
                 <label>Peso:</label>
-                <input type="number" id="peso" required>
+                <input type="float" id="peso" required>
                 <label>Idade:</label>
                 <input type="number" id="idade" required>
                 <button type="submit">Marcar</button>
